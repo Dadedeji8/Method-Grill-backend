@@ -72,10 +72,10 @@ app.use('*', (req, res) => {
 // Global error handler
 app.use((err, req, res, next) => {
     console.error('Unhandled error:', err);
-    
+
     // Don't leak error details in production
     const isDevelopment = process.env.NODE_ENV === 'development';
-    
+
     res.status(err.status || 500).json({
         success: false,
         message: isDevelopment ? err.message : 'Internal server error',
@@ -101,7 +101,7 @@ const connectToDatabase = async () => {
             serverSelectionTimeoutMS: 5000,
             socketTimeoutMS: 45000,
         });
-        
+
         cachedConnection = connection;
         console.log("✅ Connected to database successfully");
         return connection;
@@ -112,10 +112,13 @@ const connectToDatabase = async () => {
 };
 
 const createServer = async () => {
+    app.get('/', (req, res) => {
+        res.send('Hello World!');
+    })
     try {
         // Connect to MongoDB
         await connectToDatabase();
-        
+
         // Start server (only if not in Vercel environment)
         if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
             const server = app.listen(port, () => {

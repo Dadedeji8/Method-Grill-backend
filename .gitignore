@@ -1,0 +1,16 @@
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+build/
+target/
+*.log
+
+# Dependencies
+node_modules/
+vendor/
+.env
+# IDE-specific files
+.vscode/
+.idea/
