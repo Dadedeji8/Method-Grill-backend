@@ -40,6 +40,20 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Request validation
 app.use(validateRequest);
 
+// Database connection middleware for serverless
+app.use(async (req, res, next) => {
+    try {
+        await connectToDatabase();
+        next();
+    } catch (error) {
+        console.error('Database connection failed:', error);
+        return res.status(500).json({
+            success: false,
+            message: 'Database connection failed'
+        });
+    }
+});
+
 // Logging middleware
 app.use((req, res, next) => {
     console.log(`${new Date().toISOString()} - ${req.method} ${req.path} - IP: ${req.ip}`);
@@ -99,9 +113,15 @@ const connectToDatabase = async () => {
         const connection = await mongoose.connect(process.env.MONGODB_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
-            maxPoolSize: 10,
-            serverSelectionTimeoutMS: 5000,
-            socketTimeoutMS: 45000,
+            maxPoolSize: 5, // Reduced for serverless
+            minPoolSize: 1,
+            serverSelectionTimeoutMS: 8000, // Increased timeout
+            socketTimeoutMS: 30000, // Reduced for faster failures
+            connectTimeoutMS: 10000,
+            heartbeatFrequencyMS: 10000,
+            maxIdleTimeMS: 30000,
+            bufferCommands: false, // Disable mongoose buffering
+            bufferMaxEntries: 0, // Disable mongoose buffering
         });
 
         cachedConnection = connection;
