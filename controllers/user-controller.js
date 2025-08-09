@@ -3,7 +3,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs"); // Changed from bcrypt to bcryptjs
 const jwt = require("jsonwebtoken");
-const { dbOperationWithTimeout } = require("../utils/timeout-handler");
 
 // Input validation helper
 const validateInput = (fields) => {

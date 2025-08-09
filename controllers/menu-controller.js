@@ -193,18 +193,11 @@ const getAllMenu = async (req, res) => {
             menuQuery.select(selectFields);
         }
 
-        // Execute queries in parallel for better performance with timeout
-        const queryPromise = Promise.race([
-            Promise.all([
-                menuQuery.maxTimeMS(15000), // 15 second timeout
-                Menu.countDocuments(query).maxTimeMS(10000) // 10 second timeout
-            ]),
-            new Promise((_, reject) => 
-                setTimeout(() => reject(new Error('Query timeout')), 20000)
-            )
+        // Execute queries in parallel for better performance
+        const [menus, totalCount] = await Promise.all([
+            menuQuery,
+            Menu.countDocuments(query)
         ]);
-
-        const [menus, totalCount] = await queryPromise;
 
         const totalPages = Math.ceil(totalCount / limitNum);
 
