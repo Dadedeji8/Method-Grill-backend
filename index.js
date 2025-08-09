@@ -59,7 +59,9 @@ app.get('/health', (req, res) => {
 // API routes
 app.use("/api/v1/menu", menuRoute);
 app.use("/api/v1/auth", authRoute);
-
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+})
 // 404 handler
 app.use('*', (req, res) => {
     res.status(404).json({
@@ -112,9 +114,7 @@ const connectToDatabase = async () => {
 };
 
 const createServer = async () => {
-    app.get('/', (req, res) => {
-        res.send('Hello World!');
-    })
+
     try {
         // Connect to MongoDB
         await connectToDatabase();
