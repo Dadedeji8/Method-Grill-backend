@@ -48,12 +48,12 @@ const validateRequest = (req, res, next) => {
     }
 
     // Basic request size validation (Express already handles this, but good to be explicit)
-    if (req.method === 'POST' && req.body && JSON.stringify(req.body).length > 1024 * 1024) {
-        return res.status(413).json({
-            success: false,
-            message: "Request body too large"
-        });
-    }
+    // if (req.method === 'POST' && req.body && JSON.stringify(req.body).length > 1024 * 1024) {
+    //     return res.status(413).json({
+    //         success: false,
+    //         message: "Request body too large"
+    //     });
+    // }
 
     next();
 };
