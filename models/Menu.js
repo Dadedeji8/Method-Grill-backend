@@ -71,7 +71,8 @@ const MenuSchema = new mongoose.Schema({
     preparationTime: {
         type: Number, // in minutes
         min: [1, "Preparation time must be at least 1 minute"],
-        max: [180, "Preparation time cannot exceed 3 hours"]
+        max: [180, "Preparation time cannot exceed 3 hours"],
+        default: 10
     },
     nutritionalInfo: {
         calories: { type: Number, min: 0 },
