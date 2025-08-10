@@ -61,7 +61,7 @@ const addItemMenu = async (req, res) => {
             images: images || [],
             isAvailable: isAvailable !== undefined ? isAvailable : true,
             ingredients: ingredients?.trim(),
-            category: category.toLowerCase().trim()
+            category: category
         };
 
         // Add optional fields if provided
@@ -392,7 +392,7 @@ const editSingleMenuItem = async (req, res) => {
                     message: `Category must be one of: ${validCategories.join(", ")}`
                 });
             }
-            updates.category = updates.category.toLowerCase();
+            updates.category = updates.category;
         }
 
         // Trim string fields
