@@ -8,7 +8,7 @@ const menuRoute = require("./routes/menu-route");
 const authRoute = require("./routes/user-route");
 
 // Import middleware
-const { rateLimit, validateRequest } = require("./middlewares/authMiddleware");
+const { validateRequest } = require("./middlewares/authMiddleware");
 
 const app = express();
 
