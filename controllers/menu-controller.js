@@ -36,7 +36,7 @@ const addItemMenu = async (req, res) => {
         }
 
         // Validate category
-        const validCategories = ["appetizer", "main-course", "dessert", "beverage", "side-dish", "special"];
+        const validCategories = ["SOUPS & SWALLOW", "BREAD LOVERS CORNER", "PEPPERSOUP CORNER", "APPETIZERS", "DESSERT", "BEVERAGE", "LIGHT FOOD OPTIONS", "BREAKFAST MENU", "PEPPERSOUP CORNER", "SPECIAL"];
         if (!validCategories.includes(category.toLowerCase())) {
             return res.status(400).json({
                 success: false,
@@ -89,7 +89,7 @@ const addItemMenu = async (req, res) => {
 
     } catch (err) {
         console.error("Add menu item error:", err);
-        
+
         // Handle validation errors
         if (err.name === 'ValidationError') {
             const errors = Object.values(err.errors).map(e => e.message);
@@ -324,7 +324,7 @@ const getPriceRange = async (req, res) => {
 const getSingleMenuItem = async (req, res) => {
     try {
         const { id } = req.params;
-        
+
         // Validate ObjectId
         if (!id.match(/^[0-9a-fA-F]{24}$/)) {
             return res.status(400).json({
@@ -398,7 +398,7 @@ const editSingleMenuItem = async (req, res) => {
         // Trim string fields
         if (updates.name) updates.name = updates.name.trim();
         if (updates.description) updates.description = updates.description.trim();
-        if (updates.ingredients) updates.ingredients = updates.ingredients.trim();
+        if (updates.ingredients) updates.ingredients = updates.ingredients;
         if (updates.featuredImage) updates.featuredImage = updates.featuredImage.trim();
 
         const menu = await Menu.findByIdAndUpdate(
@@ -424,7 +424,7 @@ const editSingleMenuItem = async (req, res) => {
         });
     } catch (err) {
         console.error("Edit menu item error:", err);
-        
+
         // Handle validation errors
         if (err.name === 'ValidationError') {
             const errors = Object.values(err.errors).map(e => e.message);
