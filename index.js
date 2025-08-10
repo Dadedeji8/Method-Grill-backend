@@ -31,11 +31,11 @@ app.use(cors({
 }));
 
 // Rate limiting
-app.use(rateLimit(100, 15 * 60 * 1000)); // 100 requests per 15 minutes
+// app.use(rateLimit(100, 15 * 60 * 1000)); // 100 requests per 15 minutes
 
 // Body parsing middleware
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(express.json());
+app.use(express.urlencoded());
 
 // Request validation
 app.use(validateRequest);
@@ -96,13 +96,7 @@ const connectToDatabase = async () => {
     }
 
     try {
-        const connection = await mongoose.connect(process.env.MONGODB_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            maxPoolSize: 10,
-            serverSelectionTimeoutMS: 5000,
-            socketTimeoutMS: 45000,
-        });
+        const connection = await mongoose.connect(process.env.MONGODB_URI);
 
         cachedConnection = connection;
         console.log("✅ Connected to database successfully");
