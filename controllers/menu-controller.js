@@ -36,8 +36,19 @@ const addItemMenu = async (req, res) => {
         }
 
         // Validate category
-        const validCategories = ["SOUPS & SWALLOW", "BREAD LOVERS CORNER", "PEPPERSOUP CORNER", "APPETIZERS", "DESSERT", "BEVERAGE", "LIGHT FOOD OPTIONS", "BREAKFAST MENU", "PEPPERSOUP CORNER", "SPECIAL"];
-        if (!validCategories.includes(category)) {
+        const validCategories = [
+            "soups & swallow",
+            "bread lovers corner",
+            "peppersoup corner",
+            "appetizers",
+            "dessert",
+            "beverage",
+            "light food options",
+            "breakfast menu",
+            "peppersoup corner",
+            "special"
+        ];
+        if (!validCategories.includes(category.toLowerCase())) {
             return res.status(400).json({
                 success: false,
                 message: `Category must be one of: ${validCategories.join(", ")}`
@@ -385,8 +396,19 @@ const editSingleMenuItem = async (req, res) => {
 
         // Validate category if provided
         if (updates.category) {
-            const validCategories = ["SOUPS & SWALLOW", "BREAD LOVERS CORNER", "PEPPERSOUP CORNER", "APPETIZERS", "DESSERT", "BEVERAGE", "LIGHT FOOD OPTIONS", "BREAKFAST MENU", "PEPPERSOUP CORNER", "SPECIAL"];
-            if (!validCategories.includes(updates.category)) {
+            const validCategories = [
+                "soups & swallow",
+                "bread lovers corner",
+                "peppersoup corner",
+                "appetizers",
+                "dessert",
+                "beverage",
+                "light food options",
+                "breakfast menu",
+                "peppersoup corner",
+                "special"
+            ];
+            if (!validCategories.includes(updates.category.toLowerCase())) {
                 return res.status(400).json({
                     success: false,
                     message: `Category must be one of: ${validCategories.join(", ")}`
