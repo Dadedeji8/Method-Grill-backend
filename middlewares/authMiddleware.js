@@ -66,9 +66,9 @@ const authMiddleware = async (req, res, next) => {
 
         // If no token is provided, return a 401 status code with a message
         if (!authHeader) {
-            return res.status(401).json({ 
+            return res.status(401).json({
                 success: false,
-                message: "Access denied. No token provided" 
+                message: "Access denied. No token provided"
             });
         }
 
@@ -80,9 +80,9 @@ const authMiddleware = async (req, res, next) => {
         // Check if JWT_SECRET is available
         if (!process.env.JWT_SECRET) {
             console.error("JWT_SECRET environment variable is not set");
-            return res.status(500).json({ 
+            return res.status(500).json({
                 success: false,
-                message: "Internal Server Error" 
+                message: "Internal Server Error"
             });
         }
 
@@ -98,25 +98,25 @@ const authMiddleware = async (req, res, next) => {
     } catch (err) {
         // Handle different types of JWT errors
         if (err.name === 'TokenExpiredError') {
-            return res.status(401).json({ 
+            return res.status(401).json({
                 success: false,
-                message: "Token expired. Please login again." 
+                message: "Token expired. Please login again."
             });
         } else if (err.name === 'JsonWebTokenError') {
-            return res.status(403).json({ 
+            return res.status(403).json({
                 success: false,
-                message: "Invalid token" 
+                message: "Invalid token"
             });
         } else if (err.name === 'NotBeforeError') {
-            return res.status(403).json({ 
+            return res.status(403).json({
                 success: false,
-                message: "Token not active yet" 
+                message: "Token not active yet"
             });
         } else {
             console.error("Auth middleware error:", err);
-            return res.status(500).json({ 
+            return res.status(500).json({
                 success: false,
-                message: "Internal Server Error" 
+                message: "Internal Server Error"
             });
         }
     }
@@ -143,9 +143,9 @@ const authorize = (...roles) => {
     };
 };
 
-module.exports = { 
-    authMiddleware, 
-    authorize, 
-    rateLimit, 
-    validateRequest 
+module.exports = {
+    authMiddleware,
+    authorize,
+    rateLimit,
+    validateRequest
 };
