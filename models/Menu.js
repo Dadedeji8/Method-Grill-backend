@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const MenuSchema = new mongoose.Schema({
-    name: { 
-        type: String, 
+    name: {
+        type: String,
         required: [true, "Menu item name is required"],
         unique: true,
         trim: true,
@@ -14,7 +14,7 @@ const MenuSchema = new mongoose.Schema({
         required: [true, "Price is required"],
         min: [0, "Price cannot be negative"],
         validate: {
-            validator: function(value) {
+            validator: function (value) {
                 return !isNaN(value) && value >= 0;
             },
             message: "Price must be a valid positive number"
@@ -23,7 +23,7 @@ const MenuSchema = new mongoose.Schema({
     images: {
         type: [String],
         validate: {
-            validator: function(array) {
+            validator: function (array) {
                 return array.every(url => typeof url === 'string' && url.trim().length > 0);
             },
             message: "All image URLs must be valid strings"
@@ -49,13 +49,13 @@ const MenuSchema = new mongoose.Schema({
         trim: true,
         lowercase: true,
         enum: {
-            values: ["appetizer", "main-course", "dessert", "beverage", "side-dish", "special"],
-            message: "Category must be one of: appetizer, main-course, dessert, beverage, side-dish, special"
+            values: ["SOUPS & SWALLOW", "APPETIZERS", "DESSERT", "BEVERAGE", "LIGHT FOOD OPTIONS", "BREAKFAST MENU", "PEPPERSOUP CORNER", "SPECIAL"],
+            message: "Category must be one of: SOUPS & SWALLOW, APPETIZERS, DESSERT, BEVERAGE, LIGHT FOOD OPTIONS, BREAKFAST MENU, PEPPERSOUP CORNER ,SPECIAL"
         }
     },
-    isAvailable: { 
-        type: Boolean, 
-        default: true 
+    isAvailable: {
+        type: Boolean,
+        default: true
     },
     preparationTime: {
         type: Number, // in minutes
