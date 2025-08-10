@@ -49,11 +49,11 @@ const UserSchema = new mongoose.Schema({
 });
 
 // Index for better query performance
-UserSchema.index({ email: 1 });
+// UserSchema.index({ email: 1 });
 UserSchema.index({ phoneNumber: 1 });
 
 // Remove password from JSON output
-UserSchema.methods.toJSON = function() {
+UserSchema.methods.toJSON = function () {
     const userObject = this.toObject();
     delete userObject.password;
     return userObject;
