@@ -36,8 +36,8 @@ const addItemMenu = async (req, res) => {
         }
 
         // Validate category
-        const validCategories = ["SOUPS & SWALLOW", "BREAD LOVERS CORNER", "PEPPERSOUP CORNER", "APPETIZERS", "DESSERT", "BEVERAGE", "LIGHT FOOD OPTIONS", "BREAKFAST MENU", "PEPPERSOUP CORNER", "SPECIAL"].toLowerCase();
-        if (!validCategories.includes(category.toLowerCase())) {
+        const validCategories = ["SOUPS & SWALLOW", "BREAD LOVERS CORNER", "PEPPERSOUP CORNER", "APPETIZERS", "DESSERT", "BEVERAGE", "LIGHT FOOD OPTIONS", "BREAKFAST MENU", "PEPPERSOUP CORNER", "SPECIAL"];
+        if (!validCategories.includes(category)) {
             return res.status(400).json({
                 success: false,
                 message: `Category must be one of: ${validCategories.join(", ")}`

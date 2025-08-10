@@ -49,7 +49,7 @@ const MenuSchema = new mongoose.Schema({
         trim: true,
         lowercase: true,
         enum: {
-            values: ["SOUPS & SWALLOW", "BREAD LOVERS CORNER", "PEPPERSOUP CORNER", "APPETIZERS", "DESSERT", "BEVERAGE", "LIGHT FOOD OPTIONS", "BREAKFAST MENU", "PEPPERSOUP CORNER", "SPECIAL"].toLowerCase(),
+            values: ["SOUPS & SWALLOW", "BREAD LOVERS CORNER", "PEPPERSOUP CORNER", "APPETIZERS", "DESSERT", "BEVERAGE", "LIGHT FOOD OPTIONS", "BREAKFAST MENU", "PEPPERSOUP CORNER", "SPECIAL"],
             message: "Category must be one of: SOUPS & SWALLOW, APPETIZERS, DESSERT, BEVERAGE, LIGHT FOOD OPTIONS, BREAKFAST MENU, PEPPERSOUP CORNER,BREAD LOVERS CORNER ,SPECIAL"
         }
     },
